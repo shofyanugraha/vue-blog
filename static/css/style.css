@@ -1,0 +1,51 @@
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+content {
+  margin-top: 100px;
+}
+#featured {
+  margin-bottom: 20px;
+}
+
+article{
+  margin-bottom: 20px;
+}
+
+@media (min-width: 960px) {
+	.uk-navbar-brand {
+		float: none;
+		text-align: center;
+		margin: 1em 0;
+	}
+	.uk-navbar-nav {
+		float: none;
+		text-align: center;
+	}
+	.uk-navbar-nav>li {
+		display: inline-block;
+		float: none;
+	}
+}
