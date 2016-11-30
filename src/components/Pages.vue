@@ -1,18 +1,26 @@
 <template>
   <content id="pages">
     <div class="container">
-      <div class="columns is-multiline" id="featured">
-        <article class="column featured is-6" v-bind:style="setBackground(first)">
-          <h1>{{ first.title }}</h1>
-              <p class="uk-article-meta">Ditulis oleh {{ first.full_name }}  pada {{ moment(first.created_at).fromNow() }}</p>
+      <div class="columns" id="featured">
+        <article class="column featured is-6">
+          <div class="content-wrapper" v-bind:style="setBackground(first)">
+            <div class="content">
+              <h1 class="title">{{ first.title }}</h1>
+              <p class="meta">Ditulis oleh {{ first.full_name }}  pada {{ moment(first.created_at).fromNow() }}</p>
+            </div>
+          </div>
         </article>
-        <div class="column is-6 columns is-multiline" v-if="featureds.length > 0" >
-          <article class="column is-6" v-for="(featured, index) in featureds" v-if="index != 0" v-bind:style="setBackground(featured)">
-            <div class="">
-              <h1>{{ featured.title }}</h1>
-              <p class="uk-article-meta">Ditulis oleh {{ featured.writer.full_name }}  pada {{ moment(featured.created_at).fromNow() }}</p>
+        <div class="column is-6" v-if="featureds.length > 0" >
+          <div class="columns is-multiline">
+          <article class="column is-6" v-for="(featured, index) in featureds" v-if="index != 0" >
+            <div class="content-wrapper" v-bind:style="setBackground(featured)">
+              <div class="content">
+                <h1 class="title">{{ featured.title }}</h1>
+                <p class="meta">Ditulis oleh {{ featured.writer.full_name }}  pada {{ moment(featured.created_at).fromNow() }}</p>
+              </div>
             </div> 
           </article>
+          </div> 
         </div>
         <div v-else class="uk-text-center uk-block uk-block-primary" id="featured">
           <h1>Belum Ada Featured Content</h1>
@@ -94,11 +102,49 @@ export default {
 </script>
 <style lang="scss">
   #featured {
+    .content-wrapper {
+      position:relative;
+      padding: 20px;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      background-position: center;
+      background-size: cover;
+      &:before {
+        position: absolute;
+        background: rgba(0,0,0, .5);
+        width: 100%;
+        height: 100%;
+        content: "";
+        left: 0;
+        top: 0;
+      }
+      .content {
+        position:relative;
+        z-index: 1;
+        color: #fff;
+      }
+      .title {
+        font-size: 1.6em;
+        line-height: 1.2em;
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      .meta {
+        font-size: 90%;
+      }
+    }
     .column {
       height: 200px;
       background-position: center;
+      position: relative;
       &.featured {
         height: 400px;
+        .title {
+          font-size: 2.4em;
+        }
+
       }
     }
   }

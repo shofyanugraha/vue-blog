@@ -39,7 +39,7 @@ export default {
   z-index: 2048;
   pointer-events: none;
   #nprogress {
-    $color: #48e79a;
+    $color: #54ff56;
     .bar {
       background: $color;
     }
