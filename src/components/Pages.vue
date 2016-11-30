@@ -1,24 +1,24 @@
 <template>
-  <content id="pages">
+  <div id="pages">
     <div class="container">
-      <div class="columns" id="featured">
+      <div class="columns" id="featured" v-if="featureds.length > 0">
         <article class="column featured is-6">
-          <div class="content-wrapper" v-bind:style="setBackground(first)">
+          <router-link class="content-wrapper" v-bind:style="setBackground(first)" :to="{name: 'showPost', params: { slug: first.slug }}">
             <div class="content">
               <h1 class="title">{{ first.title }}</h1>
-              <p class="meta">Ditulis oleh {{ first.full_name }}  pada {{ moment(first.created_at).fromNow() }}</p>
+              <small>Ditulis oleh {{ first.full_name }}  pada {{ moment(first.created_at).fromNow() }}</small>
             </div>
-          </div>
+          </router-link>
         </article>
         <div class="column is-6" v-if="featureds.length > 0" >
           <div class="columns is-multiline">
           <article class="column is-6" v-for="(featured, index) in featureds" v-if="index != 0" >
-            <div class="content-wrapper" v-bind:style="setBackground(featured)">
+            <router-link class="content-wrapper" v-bind:style="setBackground(featured)" :to="{name: 'showPost', params: { slug: featured.slug }}">
               <div class="content">
                 <h1 class="title">{{ featured.title }}</h1>
-                <p class="meta">Ditulis oleh {{ featured.writer.full_name }}  pada {{ moment(featured.created_at).fromNow() }}</p>
+                <small>Ditulis oleh {{ featured.writer.full_name }}  pada {{ moment(featured.created_at).fromNow() }}</small>
               </div>
-            </div> 
+            </router-link> 
           </article>
           </div> 
         </div>
@@ -26,31 +26,121 @@
           <h1>Belum Ada Featured Content</h1>
         </div>
       </div>
-      
-      <!-- <div class="uk-grid">
-        <div class="uk-width-3-4" v-if="articles.length > 0" id="articles">
-          <article v-for="article in articles">
-            <div class="uk-panel uk-panel-box">
-              <div class="uk-grid">
-                <div class="uk-width-1-3">
-                  <router-link :to="{ name: 'showPost', params: { slug : article.slug } }"></router-link>
+      <div v-else class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title">Featured Content Belum Tersedia</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="columns">
+        <aside class="column is-one-third">
+          <div class="widget">
+            <div class="widget-title">What's New</div>
+
+            <article class="media" v-for="article in articles" >
+              <div class="media-left" href="#">
+                <figure class="image is-64x64">
+                   <img src="http://placehold.it/128x128" alt="Image">
+                </figure>
+              </div>
+              <div class="media-content">
+                  <h3 class="title is-5">{{ article.title }}</h3>
+                  <div class="content">
+                  <small>Ditulis oleh {{ article.writer.full_name }}  pada {{ moment(article.created_at).fromNow() }}</small>
+                  </div>
+              </div>
+              
+            </article>
+          </div>
+        </aside>
+        <aside class="column is-one-third ">
+            <article class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="http://placehold.it/300x225" alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href="">Biz Corner</a>
+                    <p class="title is-5">Article</p>
+                  </div>
                 </div>
-                <div class="uk-width-2-3">
-                  <h1 class="uk-h2">{{ article.title }}</h1>
-                  <p class="uk-article-meta">Ditulis oleh <router-link :to="{ name: 'showAuthor', params: { slug : article.writer.id } }">{{ article.writer.full_name }}</router-link>  pada {{ moment(article.created_at).fromNow() }}</p>
+
+                <div class="content">
+                  <small>Ditulis oleh Berry Firmann pada 10 days ago</small>
                 </div>
               </div>
-            </div> 
-          </article>
-        </div>
-        <div class="uk-width-1-4">
-          <div class="uk-block uk-block-secondary uk-text-center uk-text-contrast">
-            Sidebar
-          </div>
-        </div>
-      </div> -->
+            </article>
+            <article class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="http://placehold.it/300x225" alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href="">Biz Corner</a>
+                    <p class="title is-5">Article</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <small>Ditulis oleh Berry Firmann pada 10 days ago</small>
+                </div>
+              </div>
+            </article>
+
+        </aside>
+        
+        <aside class="column is-one-third ">
+            <article class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="http://placehold.it/300x225" alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href="">Biz Corner</a>
+                    <p class="title is-5">Article</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <small>Ditulis oleh Berry Firmann pada 10 days ago</small>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="http://placehold.it/300x225" alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <a href="">Biz Corner</a>
+                    <p class="title is-5">Article</p>
+                  </div>
+                </div>
+
+                <div class="content">
+                  <small>Ditulis oleh Berry Firmann pada 10 days ago</small>
+                </div>
+              </div>
+            </article>
+
+        </aside>
+        
+      </div>
     </div>
-  </content>
+  </div>
 </template>
 <script>
 import Moment from 'moment'
@@ -70,7 +160,7 @@ export default {
   },
   methods: {
     fetchStories: function () {
-      this.$http.get('http://api.news.nixia.tech/post?filter=all&sort=latest')
+      this.$http.get('http://api.news.nixia.tech/post/featured')
       .then((response) => {
         if (response.body.meta.status === true) {
           this.featureds = response.body.data
@@ -78,7 +168,7 @@ export default {
         }
       }, (response) => {
       })
-      this.$http.get('http://api.news.nixia.tech/post')
+      this.$http.get('http://api.news.nixia.tech/post?filter=all&sort=latest')
       .then((response) => {
         if (response.body.meta.status === true) {
           this.articles = response.body.data
@@ -101,8 +191,12 @@ export default {
 }
 </script>
 <style lang="scss">
+  .card {
+    width: auto;
+  }
   #featured {
     .content-wrapper {
+      display:block;
       position:relative;
       padding: 20px;
       height: 100%;
@@ -118,6 +212,14 @@ export default {
         content: "";
         left: 0;
         top: 0;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+      }
+      &:hover:before {
+        background: rgba(0,0,0, .8);
       }
       .content {
         position:relative;
