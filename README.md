@@ -1,6 +1,6 @@
-# my-project
+# Vue Blog
 
-> A Vue.js project
+> A pilot project to create a blog using a Vue2 + Bulma CSS
 
 ## Build Setup
 
@@ -14,5 +14,3 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
