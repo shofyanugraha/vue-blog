@@ -2,20 +2,20 @@
   <div id="home">
     <div class="container">
       <div class="columns" id="featured" v-if="featureds.length > 0">
-        <article class="column featured is-6">
+        <article class="column featured is-8">
           <router-link class="content-wrapper" v-bind:style="setBackground(first)" :to="{name: 'showPost', params: { slug: first.slug }}">
             <div class="content">
-              <h1 class="title">{{ first.title }}</h1>
+              <h1 class="title is-1">{{ first.title }}</h1>
               <small>Posted by {{ first.full_name }}  at {{ moment(first.created_at).fromNow() }}</small>
             </div>
           </router-link>
         </article>
-        <div class="column is-6" v-if="featureds.length > 0" >
+        <div class="column is-4" v-if="featureds.length > 0" >
           <div class="columns is-multiline">
-          <article class="column is-6" v-for="(featured, index) in featureds" v-if="index != 0" >
+          <article class="column is-12" v-for="(featured, index) in featureds" v-if="index != 0" >
             <router-link class="content-wrapper" v-bind:style="setBackground(featured)" :to="{name: 'showPost', params: { slug: featured.slug }}">
               <div class="content">
-                <h1 class="title">{{ featured.title }}</h1>
+                <h1 class="title is-1">{{ featured.title }}</h1>
                 <small>Posted by {{ featured.writer.full_name }}  at {{ moment(featured.created_at).fromNow() }}</small>
               </div>
             </router-link> 
@@ -59,6 +59,8 @@
           </div>
         </aside>
         <aside class="column is-one-third ">
+          <div class="widget">
+            <a class="widget-title" href="">Biz Corner</a>
             <article class="card">
               <div class="card-image">
                 <figure class="image is-16by9">
@@ -68,7 +70,6 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <a class="category" href="">Biz Corner</a>
                     <p class="title is-5">Article</p>
                   </div>
                 </div>
@@ -78,6 +79,9 @@
                 </div>
               </div>
             </article>
+          </div>
+          <div class="widget">
+            <a class="widget-title" href="">Gadget Corner</a>
             <article class="card">
               <div class="card-image">
                 <figure class="image is-16by9">
@@ -87,7 +91,6 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <a class="category" href="">Gadget Corner</a>
                     <p class="title is-5">Article</p>
                   </div>
                 </div>
@@ -97,10 +100,12 @@
                 </div>
               </div>
             </article>
-
+          </div>
         </aside>
         
         <aside class="column is-one-third ">
+          <div class="widget">
+            <a class="widget-title" href="">Game Corner</a>
             <article class="card">
               <div class="card-image">
                 <figure class="image is-16by9">
@@ -110,7 +115,6 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <a class="category" href="">Game Corner</a>
                     <p class="title is-5">Article</p>
                   </div>
                 </div>
@@ -120,6 +124,9 @@
                 </div>
               </div>
             </article>
+          </div>
+          <div class="widget">
+            <a class="widget-title" href="">Lifestyle Corner</a>
             <article class="card">
               <div class="card-image">
                 <figure class="image is-16by9">
@@ -129,7 +136,6 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <a class="category" href="">Lifestyle Corner</a>
                     <p class="title is-5">Article</p>
                   </div>
                 </div>
@@ -139,7 +145,7 @@
                 </div>
               </div>
             </article>
-
+          </div>
         </aside>
         
       </div>
@@ -168,6 +174,7 @@ export default {
       .then((response) => {
         if (response.body.meta.status === true) {
           this.featureds = response.body.data
+          console.log(this.featureds)
           this.first = this.featureds[0]
         }
       }, (response) => {
@@ -195,15 +202,15 @@ export default {
 }
 </script>
 <style lang="scss">
-  .card {
-    width: auto;
-    margin-bottom: 20px;
-    .category {
+    .widget-title {
       font-weight:bold;
       font-size: .9em;
       margin-bottom: .5em;
       display:inline-block;
     }
+  .card {
+    width: auto;
+    margin-bottom: 20px;
     .title {
       margin-bottom: 0;
     }
@@ -240,13 +247,12 @@ export default {
         background: rgba(0,0,0, .8);
       }
       .content {
-        position:relative;
+        position:absolute;
         z-index: 1;
         color: #fff;
+        bottom: 20px;
       }
       .title {
-        font-size: 1.6em;
-        line-height: 1.2em;
         color: #fff;
         font-weight: bold;
         margin-bottom: 0;
@@ -256,15 +262,11 @@ export default {
       }
     }
     .column {
-      height: 200px;
+      height: 280px;
       background-position: center;
       position: relative;
       &.featured {
-        height: 400px;
-        .title {
-          font-size: 2.4em;
-        }
-
+        height: 560px;
       }
     }
   }
@@ -280,6 +282,21 @@ export default {
       }
     }
   }
-  
+  @media(max-width: 1024px) {
+    #featured {
+      .column {
+        height: 240px;
+        background-position: center;
+        position: relative;
+        &.featured {
+          height: 480px;
+          .title {
+            font-size: 2.4em;
+          }
+
+        }
+      }
+    }
+  }
 </style>
 
