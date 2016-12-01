@@ -5,6 +5,7 @@
         <article class="column featured is-8">
           <router-link class="content-wrapper" v-bind:style="setBackground(first)" :to="{name: 'showPost', params: { slug: first.slug }}">
             <div class="content">
+              <div class="category">{{ first.category.name}}</div>
               <h1 class="title is-1">{{ first.title }}</h1>
               <small>Posted by {{ first.full_name }}  at {{ moment(first.created_at).fromNow() }}</small>
             </div>
@@ -15,6 +16,7 @@
           <article class="column is-12" v-for="(featured, index) in featureds" v-if="index != 0" >
             <router-link class="content-wrapper" v-bind:style="setBackground(featured)" :to="{name: 'showPost', params: { slug: featured.slug }}">
               <div class="content">
+                <div class="category">{{ featured.category.name}}</div>
                 <h1 class="title is-1">{{ featured.title }}</h1>
                 <small>Posted by {{ featured.writer.full_name }}  at {{ moment(featured.created_at).fromNow() }}</small>
               </div>
@@ -255,7 +257,10 @@ export default {
       .title {
         color: #fff;
         font-weight: bold;
-        margin-bottom: 0;
+        margin: 0;
+      }
+      .category {
+        text-transform: uppercase;
       }
       .meta {
         font-size: 90%;
