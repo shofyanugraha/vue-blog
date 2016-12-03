@@ -22,6 +22,7 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
+    { path: '/', component: Home },
     { path: '/home', component: Home },
     { path: '/foo', component: Foo },
     { path: '/bar', component: Bar },
@@ -38,9 +39,7 @@ const router = new VueRouter({
         { path: ':slug', name: 'showAuthor', component: Bar }
       ]
     },
-    {
-      path: ':slug', name: 'showPost', component: Bar
-    }
+    { path: ':slug', name: 'showPost', component: Foo }
   ],
   linkActiveClass: 'is-active'
 })
