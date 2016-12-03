@@ -23,6 +23,7 @@ const router = new VueRouter({
   base: __dirname,
   routes: [
     { path: '/', component: Home },
+    { path: '/post/:slug', name: 'showPost', component: Post },
     { path: '/home', component: Home },
     { path: '/bar', component: Bar },
     { path: '/category',
@@ -37,8 +38,7 @@ const router = new VueRouter({
       children: [
         { path: ':slug', name: 'showAuthor', component: Bar }
       ]
-    },
-    { path: ':slug', name: 'showPost', component: Post }
+    }
   ],
   linkActiveClass: 'is-active'
 })
