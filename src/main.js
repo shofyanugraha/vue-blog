@@ -14,8 +14,8 @@ Vue.http.options.crossOrigin = true
 const nprogress = new NProgress({ parent: '.nprogress-container' })
 
 import Home from 'components/Home'
+import Post from 'components/Post'
 
-const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 
 const router = new VueRouter({
@@ -24,7 +24,6 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/home', component: Home },
-    { path: '/foo', component: Foo },
     { path: '/bar', component: Bar },
     { path: '/category',
       component: Bar,
@@ -39,7 +38,7 @@ const router = new VueRouter({
         { path: ':slug', name: 'showAuthor', component: Bar }
       ]
     },
-    { path: ':slug', name: 'showPost', component: Foo }
+    { path: ':slug', name: 'showPost', component: Post }
   ],
   linkActiveClass: 'is-active'
 })
