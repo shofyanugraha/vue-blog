@@ -40,7 +40,10 @@ const router = new VueRouter({
       ]
     }
   ],
-  linkActiveClass: 'is-active'
+  linkActiveClass: 'is-active',
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 /* eslint-disable no-new */

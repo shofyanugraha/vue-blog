@@ -10,6 +10,10 @@
               <div v-if="mainContent.type === 'video'" class="video-container">
                 <iframe width="560" height="315" :src="generateVideoUrl(mainContent.content.key)" frameborder="0" allowfullscreen></iframe>
               </div>
+              <div v-else>
+                <img :src="mainContent.content.square800" alt="">
+              </div>
+              <div v-html="mainContent.article"></div>
             </div>
           </div>
         </div>
@@ -21,7 +25,14 @@
               <div class="media-left" href="#">
                 <router-link  :to="{name: 'showPost', params: { slug: article.slug }}">
                   <figure class="image is-64x64">
-                     <img src="http://placehold.it/128x128" alt="Image">
+                    <router-link :to="{name: 'showPost', params: { slug: article.slug }}">
+                     <div v-if="article.type == 'video' ">
+                        <img :src="article.content.hd" alt="">
+                      </div>
+                      <div v-else>
+                        <img :src="article.content.square500" alt="">
+                      </div>
+                    </router-link>
                   </figure>
                 </router-link>
               </div>

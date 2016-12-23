@@ -63,216 +63,73 @@
       </div>
     </div>
     <div class="container">
-      <div class="columns">
-        <aside class="column is-one-third">
-          <div class="widget">
-            <div class="widget-title">What's New</div>
-            <div v-if="articles.length > 0">
-            <article class="media" v-for="article in articles">
-              <div class="media-left" href="#">
-                <router-link  :to="{name: 'showPost', params: { slug: article.slug }}">
-                  <figure class="image is-64x64">
-                     <img src="http://placehold.it/128x128" alt="Image">
-                  </figure>
-                </router-link>
-              </div>
-              <div class="media-content">
-                  <h3 class="title is-5">
-                    <router-link :to="{name: 'showPost', params: { slug: article.slug }}">{{ article.title }}</router-link>
-                  </h3>
-                  <div class="content">
-                  <small>Posted by {{ article.writer.full_name }}  at {{ moment(article.created_at).fromNow() }}</small>
+      <div class="title">What's New</div>
+      <div class="columns" v-if="articles.length > 0">
+        <aside class="column" v-for="article in articles">
+            <article class="card" >
+              <div class="card-image">
+                <figure class="image is-16by9">
+                  <router-link :to="{name: 'showPost', params: { slug: article.slug }}">
+                  <div v-if="article.type == 'video' ">
+                    <img :src="article.content.hd" alt="">
                   </div>
+                  <div v-else>
+                    <img :src="article.content.square800" alt="">
+                  </div>
+                  </router-link>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <h3 class="title is-5"><router-link :to="{name: 'showPost', params: { slug: article.slug }}">{{ article.title }}</router-link></h3>
+                    <small class="meta">Posted by {{ article.writer.full_name}} at {{ moment(article.created_at).fromNow() }}</small>
+                  </div>
+                </div>
               </div>
             </article>
-            </div>
-            <div class="empty" v-else>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </aside>
-        <aside class="column is-one-third ">
-          <div class="widget" v-if="this.business.length > 0">
-            <a class="widget-title" href="">Biz Corner</a>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                  <img src="http://placehold.it/300x225" alt="">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"><router-link :to="{name: 'showPost', params: { slug: business[0].slug }}">{{ business[0].title }}</router-link></h3>
-                    <small class="meta">Posted by {{ business[0].writer.full_name}} at {{ moment(business[0].created_at).fromNow() }}</small>
-                  </div>
-                </div>
-              </div>
-            </article>
+      </div>
+      <div class="empty" v-else>
+        <div class="media">
+          <div class="media-left" href="#">
+              <figure class="image is-64x64">
+              </figure>
           </div>
-          <div class="widget empty" v-else>
-            <div class="widget-title"></div>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                </figure>
+          <div class="media-content">
+              <h3 class="title is-5">
+                
+              </h3>
+              <div class="meta">
               </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"></h3>
-                    <div class="meta"></div>
-                  </div>
-                </div>
-              </div>
-            </article>
           </div>
-          <div class="widget" v-if="this.gadgets.length > 0">
-            <a class="widget-title" href="">Gadget Corner</a>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                  <img src="http://placehold.it/300x225" alt="">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"><router-link :to="{name: 'showPost', params: { slug: business[0].slug }}">{{ business[0].title }}</router-link></h3>
-                    <small class="meta">Posted by {{ business[0].writer.full_name}} at {{ moment(business[0].created_at).fromNow() }}</small>
-                  </div>
-                </div>
-              </div>
-            </article>
+        </div>
+        <div class="media">
+          <div class="media-left" href="#">
+              <figure class="image is-64x64">
+              </figure>
           </div>
-          <div class="widget empty" v-else>
-            <div class="widget-title"></div>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                </figure>
+          <div class="media-content">
+              <h3 class="title is-5">
+                
+              </h3>
+              <div class="meta">
               </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"></h3>
-                    <div class="meta"></div>
-                  </div>
-                </div>
-              </div>
-            </article>
           </div>
-        </aside>
-        <aside class="column is-one-third ">
-          <div class="widget" v-if="this.games.length > 0">
-            <a class="widget-title" href="">Game Corner</a>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                  <img src="http://placehold.it/300x225" alt="">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"><router-link :to="{name: 'showPost', params: { slug: business[0].slug }}">{{ business[0].title }}</router-link></h3>
-                    <small class="meta">Posted by {{ business[0].writer.full_name}} at {{ moment(business[0].created_at).fromNow() }}</small>
-                  </div>
-                </div>
-              </div>
-            </article>
+        </div>
+        <div class="media">
+          <div class="media-left" href="#">
+              <figure class="image is-64x64">
+              </figure>
           </div>
-          <div class="widget empty" v-else>
-            <div class="widget-title"></div>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                </figure>
+          <div class="media-content">
+              <h3 class="title is-5">
+                
+              </h3>
+              <div class="meta">
               </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"></h3>
-                    <div class="meta"></div>
-                  </div>
-                </div>
-              </div>
-            </article>
           </div>
-          <div class="widget" v-if="this.lifestyles.length > 0">
-            <a class="widget-title" href="">Lifestyles Corner</a>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                  <img src="http://placehold.it/300x225" alt="">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"><router-link :to="{name: 'showPost', params: { slug: business[0].slug }}">{{ business[0].title }}</router-link></h3>
-                    <small class="meta">Posted by {{ business[0].writer.full_name}} at {{ moment(business[0].created_at).fromNow() }}</small>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="widget empty" v-else>
-            <div class="widget-title"></div>
-            <article class="card">
-              <div class="card-image">
-                <figure class="image is-16by9">
-                </figure>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <h3 class="title is-5"></h3>
-                    <div class="meta"></div>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div> 
-        </aside>
+        </div>
       </div>
     </div>
   </div>
@@ -308,42 +165,19 @@ export default {
         }
       }, (response) => {
       })
-      this.$http.get('http://api.news.nixia.tech/post?filter=all&sort=latest')
+      this.$http.get('http://api.news.nixia.tech/post?filter=publish&sort=latest')
       .then((response) => {
-        if (response.body.meta.status === true) {
+        if (response.body.meta.status === true && response.body.data.length > 0) {
           this.articles = response.body.data
-        }
-      }, (response) => {
-      })
-
-      this.$http.get('http://api.news.nixia.tech/post?category=biz&offset=1')
-      .then((response) => {
-        if (response.body.meta.status === true) {
-          this.business = response.body.data
-        }
-      }, (response) => {
-      })
-
-      this.$http.get('http://api.news.nixia.tech/post?category=lifestyle&offset=1')
-      .then((response) => {
-        if (response.body.meta.status === true) {
-          this.lifestyles = response.body.data
-        }
-      }, (response) => {
-      })
-
-      this.$http.get('http://api.news.nixia.tech/post?category=game&offset=1')
-      .then((response) => {
-        if (response.body.meta.status === true) {
-          this.games = response.body.data
         }
       }, (response) => {
       })
 
       this.$http.get('http://api.news.nixia.tech/post?category=gadget&offset=1')
       .then((response) => {
-        if (response.body.meta.status === true) {
+        if (response.body.meta.status === true && response.body.data.length > 0) {
           this.gadgets = response.body.data
+          console.log(this.gadgets[0])
         }
       }, (response) => {
       })
@@ -352,6 +186,14 @@ export default {
       return Moment(args)
     },
     setBackground: function (args) {
+      if (args.content.hd) {
+        return {
+          backgroundImage: 'url(' + args.content.hd + ')'
+        }
+      }
+      return
+    },
+    setImage: function (args) {
       if (args.content.hd) {
         return {
           backgroundImage: 'url(' + args.content.hd + ')'
