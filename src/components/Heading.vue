@@ -11,10 +11,10 @@
       </span>
       <div v-bind:class="{ 'nav-right': true, 'nav-menu': true, 'is-active': show }">
           <router-link class="nav-item" to="/home">Home</router-link>
-          <router-link class="nav-item" to="/category">Category</router-link>
           <router-link class="nav-item" :to="{name: 'selCategory', params: { catName: 'gadget' }}">Gadget</router-link>
           <router-link class="nav-item" :to="{name: 'selCategory', params: { catName: 'game' }}">Game</router-link>
           <router-link class="nav-item" :to="{name: 'selCategory', params: { catName: 'biz' }}">Biz</router-link>
+          <router-link class="nav-item" :to="{name: 'selCategory', params: { catName: 'lifestyle' }}">Lifestyle</router-link>
       </div>
     </div>
   </nav>

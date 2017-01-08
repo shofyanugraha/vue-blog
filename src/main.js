@@ -15,6 +15,7 @@ const nprogress = new NProgress({ parent: '.nprogress-container' })
 
 import Home from 'components/Home'
 import Post from 'components/Post'
+import Category from 'components/Category'
 
 const Bar = { template: '<div>bar</div>' }
 
@@ -25,12 +26,11 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/post/:slug', name: 'showPost', component: Post },
     { path: '/home', component: Home },
-    { path: '/bar', component: Bar },
     { path: '/category',
-      component: Bar,
+      component: Category,
       children: [
         { path: '', component: Home },
-        { path: ':catName', name: 'selCategory', component: Bar }
+        { path: ':catName', name: 'selCategory', component: Category }
       ]
     },
     { path: '/author',

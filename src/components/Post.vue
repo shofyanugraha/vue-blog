@@ -6,7 +6,7 @@
           <div class="box">
             <h1 class="title is-2">{{ mainContent.title }}</h1>
             <div class="sub-title meta">Posted by {{ mainContent.writer.full_name}} at {{ moment(mainContent.created_at).fromNow() }}</div>
-            <div class="content">
+            <div class="content wysiwyg">
               <div v-if="mainContent.type === 'video'" class="video-container">
                 <iframe width="560" height="315" :src="generateVideoUrl(mainContent.content.key)" frameborder="0" allowfullscreen></iframe>
               </div>
@@ -18,76 +18,7 @@
           </div>
         </div>
         <aside class="column is-one-third">
-          <div class="widget">
-            <div class="widget-title">What's New</div>
-            <div v-if="articles.length > 0">
-            <article class="media" v-for="article in articles">
-              <div class="media-left" href="#">
-                <router-link  :to="{name: 'showPost', params: { slug: article.slug }}">
-                  <figure class="image is-64x64">
-                    <router-link :to="{name: 'showPost', params: { slug: article.slug }}">
-                     <div v-if="article.type == 'video' ">
-                        <img :src="article.content.hd" alt="">
-                      </div>
-                      <div v-else>
-                        <img :src="article.content.square500" alt="">
-                      </div>
-                    </router-link>
-                  </figure>
-                </router-link>
-              </div>
-              <div class="media-content">
-                  <h3 class="title is-5">
-                    <router-link :to="{name: 'showPost', params: { slug: article.slug }}">{{ article.title }}</router-link>
-                  </h3>
-                  <div class="content">
-                  <small>Posted by {{ article.writer.full_name }}  at {{ moment(article.created_at).fromNow() }}</small>
-                  </div>
-              </div>
-            </article>
-            </div>
-            <div class="empty" v-else>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-              <div class="media">
-                <div class="media-left" href="#">
-                    <figure class="image is-64x64">
-                    </figure>
-                </div>
-                <div class="media-content">
-                    <h3 class="title is-5">
-                      
-                    </h3>
-                    <div class="meta">
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <latest-article></latest-article>
         </aside>
       </div>
     </div>
@@ -95,9 +26,13 @@
 </template>
 <script>
 import Moment from 'moment'
+import LatestArticle from './LatestArticle'
 
 export default {
   name: 'Post',
+  components: {
+    LatestArticle
+  },
   data () {
     return {
       show: false,
@@ -115,13 +50,6 @@ export default {
         if (response.body.meta.status === true) {
           this.mainContent = response.body.data
           console.log(response.body)
-        }
-      }, (response) => {
-      })
-      this.$http.get('http://api.news.nixia.tech/post?filter=all&sort=latest')
-      .then((response) => {
-        if (response.body.meta.status === true) {
-          this.articles = response.body.data
         }
       }, (response) => {
       })
